@@ -4,7 +4,7 @@
   <div class="row">
     <div class="col">
 
-      <h1>Upload file</h1>
+      <h1>Deploy ansible via web UI</h1>
       <hr>
 
       <form action="/upload" method="POST" enctype="multipart/form-data">
@@ -20,7 +20,10 @@
         <button type="submit" class="btn btn-primary">Upload</button>
 
       </form>
-
+    <form action="/upload" method="POST">
+        <input type="submit" value="start Deploy" name="action"/>
+    </form>
+    
     </div>
   </div>
 </div>

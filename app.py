@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template
 from flask import request, redirect
 
-app=Flask(__name__)
+app=Flask(__name__, static_url_path='', static_folder='static', template_folder='templates')
 
 app.config["UPLOADS"] = "/home/toan/Desktop/Nhom3_VTDT-main/static/savefile"
 
@@ -26,6 +26,9 @@ def upload():
                 
     return render_template("upload.html")
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
 
 if __name__=="__main__":
     app.run(debug=True)

@@ -1,0 +1,29 @@
+body {
+    background: #00B4DB;
+    background: -webkit-linear-gradient(to right, #0083B0, #00B4DB);
+    background: linear-gradient(to right, #0083B0, #00B4DB);
+    height: 100vh;
+}
+
+header {
+    color: white;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+}
+
+.logo img {
+    flex-basis: auto;
+}
+
+.logo h5 {
+    font-size: 20px;
+    padding-left: 20px;
+    margin-bottom: 0;
+}
+
+#nvbCollapse a {
+    color: white !important;
+}

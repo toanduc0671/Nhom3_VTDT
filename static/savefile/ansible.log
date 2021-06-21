@@ -1,0 +1,12 @@
+2021-06-20 21:39:42,006 p=3780 u=toan n=ansible | 192.168.1.16 | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
+2021-06-20 21:39:44,154 p=3780 u=toan n=ansible | 192.168.1.12 | UNREACHABLE! => {
+    "changed": false,
+    "msg": "Failed to connect to the host via ssh: ssh: connect to host 192.168.1.12 port 22: No route to host",
+    "unreachable": true
+}

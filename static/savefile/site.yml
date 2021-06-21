@@ -1,0 +1,12 @@
+---
+- name: Install mariadb
+  hosts: mariadb
+  gather_facts: false
+  roles:
+    - mariadb
+
+- name: Install wp
+  hosts: wordpress
+  gather_facts: false
+  roles:
+    - wordpress

@@ -1,30 +1,41 @@
 {%extends "layout.html"%}
+
+{%block css%}
+<link rel="stylesheet" href="/css/upload.css">
+{%endblock%}
+
 {% block content %}
 <div class="container">
-  <div class="row">
-    <div class="col">
+    <section>
+        <form action="/upload" method="POST">
+            <input type="submit" value="check connection" name="action" />
+        </form>
+        <pre>{{ gg }}</pre>
+        <div class="container p-5">
+            <div class="row">
+                <div class="col-lg-5 mx-auto">
+                    <div class="p-5 bg-white shadow rounded-lg"><img src="/imgs/upload-image.png" alt="upload Image"
+                            width="200" class="d-block mx-auto mb-4 rounded-pill">
 
-      <h1>Deploy ansible via web UI</h1>
-      <hr>
+                        <form action="/upload" method="POST" enctype="multipart/form-data">
+                            <h6 class="text-center mb-4 text-muted">
+                                Select Inventory file upload
+                            </h6>
 
-      <form action="/upload" method="POST" enctype="multipart/form-data">
+                            <div class="custom-file overflow-hidden rounded-pill mb-5">
+                                <input type="file" class="custom-file-input" name="file" id="file">
+                                <label class="custom-file-label" for="file">Select file...</label>
+                            </div>
 
-        <div class="form-group">
-          <label>Select file</label>
-          <div class="custom-file">
-            <input type="file" class="custom-file-input" name="file" id="file">
-            <label class="custom-file-label" for="file">Select file...</label>
-          </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary">Upload</button>
+                            </div>
+                        </form>
+
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <button type="submit" class="btn btn-primary">Upload</button>
-
-      </form>
-    <form action="/upload" method="POST">
-        <input type="submit" value="start Deploy" name="action"/>
-    </form>
-    
-    </div>
-  </div>
+    </section>
 </div>
 {%endblock%}

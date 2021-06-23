@@ -4,10 +4,19 @@
   <div class="row">
     <div class="col">
    		<form action="/deploy" method="POST">
-   			<input type="submit" value="List playbook" name="action" /> <br/>
-			<input type="submit" value="start Deploy" name="action" />
+
+        <p><input type="submit" value="List Inventory and Playbook" name="action" /></p>  <br/>
+        <pre>{{ playbook }}</pre>  <!-- #bien nay list cac file .yml -->
+        <pre>{{ inven }}</pre>     <!-- #bien nay list cac file .ini -->
+        <hr>
+   			<p>
+          <input name="input_playbook"> <input name="input_inventory">
+          <input type="submit" value="Start Deploy" name="action" /><br/>
+          <pre><label for="playbook">Playbook:</label>               <label for="inven">Inventory:</label></pre>
+        </p>
+
      	</form>
-     	<pre>{{ files }}</pre>
+      <pre>{{ processed_text }}</pre>  <!-- #bien nay print ra "can't find abc.yml" -->  
     </div>
   </div>
 </div>

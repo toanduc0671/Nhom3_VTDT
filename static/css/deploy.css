@@ -1,17 +1,6 @@
-.file-upload input[type='file'] {
-    display: none;
-}
-
-.rounded-lg {
-  border-radius: 1rem;
-}
-
-.custom-file-label.rounded-pill {
-  border-radius: 50rem;
-}
-
-.custom-file-label.rounded-pill::after {
-  border-radius: 0 50rem 50rem 0;
+/* All delay classes will take half the time to start */
+:root {
+    --animate-delay: 0.07s;
 }
 
 /* Submit button */
@@ -58,15 +47,4 @@
   to {
     transform: rotate(1turn);
   }
-}
-
-/* Details in modal */
-.successCode {
-  font-size: 15px;
-  color: #73af55;
-}
-
-.unreachableCode {
-  font-size: 15px;
-  color: #d06079;
 }

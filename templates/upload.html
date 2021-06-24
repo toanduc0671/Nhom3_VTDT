@@ -1,15 +1,89 @@
 {%extends "layout.html"%}
+
+{%block css%}
+<link rel="stylesheet" href="/css/upload.css">
+{%endblock%}
+
 {% block content %}
 <div class="container">
-  <div class="row">
-    <div class="col">
+  <section>
+    <div class="container p-5">
+      <div class="row">
+        <div class="col-lg-5 mx-auto">
+          <div class="p-5 bg-white shadow rounded-lg">
+            <h6 class="text-center mb-4 text-muted">
+              Select file to upload
+            </h6>
 
-      <form action="/upload" method="POST">
-        <button type="submit" class="btn btn-primary" value="Upload Playbook" name="action">Upload Playbook</button>
-        <button type="submit" class="btn btn-primary" value="Upload Inventory" name="action">Upload Inventory</button>
-        <button type="submit" class="btn btn-primary" value="Upload Roles" name="action">Upload Roles</button>
-      </form>
+            <img src="/svg/upload-image.svg" alt="upload Image" width="200" class="d-block mx-auto mb-4 rounded-pill">
+
+            <form id="uploadform" method="POST" enctype="multipart/form-data">
+              
+              <div class="form-group mb-4">
+                <label for="typeFileSelect">Type file upload:</label>
+                <select class="form-control" id="typeFileSelect" name="typeFileSelect">
+                  <option value="inventory">Inventory</option>
+                  <option value="playbook">Playbook</option>
+                  <option value="role">Role</option>
+                </select>
+              </div>
+
+              <div class="custom-file overflow-hidden rounded-pill mb-5">
+                <input id="customFile" type="file" class="custom-file-input rounded-pill" name="file">
+                <label for="customFile" class="custom-file-label rounded-pill">Choose file</label>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-round btn-lg mr-md-3 mb-2 mb-md-0"
+                  id="submitButton"><span class="button__text">Upload</span></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div class="modal fade" id="notiModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title"></h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="container-fluid">
+            <div class="row justify-content-center">
+              <div class="col-md-auto">
+                <img src="/svg/check-circle-regular.svg" alt="check circle" width="71px" hidden id="successIcon">
+                <img src="/svg/times-circle-regular.svg" alt="check circle" width="71px" hidden id="unreachableIcon">
+              </div>
+            </div>
+            <div class="row mt-4 justify-content-center">
+              <div class="col-md-auto">
+                <p id="notiText">Connect to all host successfully</p>
+              </div>
+            </div>
+            <div class="row mt-4">
+              <div class="col-sm-auto">
+                <a class="stretched-link" data-toggle="collapse" href="#collapseDetails" id="details" hidden>Details</a>
+              </div>
+            </div>
+            <div class="collapse mt-3" id="collapseDetails">
+              <div class="card card-body">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
+{%endblock%}
+
+{%block script%}
+<script src="/js/upload.js"></script>
 {%endblock%}

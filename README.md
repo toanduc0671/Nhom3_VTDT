@@ -16,9 +16,9 @@ dưới đây là sơ lược về cấu trúc của hệ thống
 
 - front-end: 
 
-+ templates
-+ ./static/css (giao diện)
-+ ./static/js (xử lý logic front-end)
+templates <br>
+./static/css (giao diện) <br>
+./static/js (xử lý logic front-end) <br>
 
 - ./static/savefile: file của người dùng up lên sẽ được lưu ở đây
 

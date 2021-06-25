@@ -1,23 +1,51 @@
 {%extends "layout.html"%}
+
+{%block css%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+<link rel="stylesheet" href="/css/deploy.css">
+{%endblock%}
+
 {% block content %}
 <div class="container">
-  <div class="row">
-    <div class="col">
-   		<form action="/deploy" method="POST">
+  <section>
+    <div class="container p-5">
+      <div class="row">
+        <div class="col-lg-5 mx-auto">
+          <div class="p-5 bg-white shadow rounded-lg">
+            <h6 class="text-center mb-4 text-muted">
+              Select files to Deploy
+            </h6>
 
-        <p><input type="submit" value="List Inventory and Playbook" name="action" /></p>  <br/>
-        <pre>{{ playbook }}</pre>  <!-- #bien nay list cac file .yml -->
-        <pre>{{ inven }}</pre>     <!-- #bien nay list cac file .ini -->
-        <hr>
-   			<p>
-          <input name="input_playbook"> <input name="input_inventory">
-          <input type="submit" value="Start Deploy" name="action" /><br/>
-          <pre><label for="playbook">Playbook:</label>               <label for="inven">Inventory:</label></pre>
-        </p>
+            <img src="/svg/deploy.svg" alt="deploy Image" width="100"
+              class="animate__animated animate__backInUp animate__delay-1s d-block mx-auto mb-4 rounded-pill">
 
-     	</form>
-      <pre>{{ processed_text }}</pre>  <!-- #bien nay print ra "can't find abc.yml" -->  
+            <form id="deployform" method="POST">
+
+              <div class="form-group mb-4">
+                <label for="inventorySelect">Choose inventory:</label>
+                <select class="form-control" id="inventorySelect" name="inventorySelect">
+                </select>
+              </div>
+
+              <div class="form-group mb-4">
+                <label for="playbookSelect">Choose playbook:</label>
+                <select class="form-control" id="playbookSelect" name="playbookSelect">
+                </select>
+              </div>
+
+              <div class="text-center">
+                <button type="submit" class="btn btn-primary btn-round btn-lg mr-md-3 mb-2 mb-md-0"
+                  id="submitButton"><span class="button__text">Deploy</span></button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </section>
 </div>
+{%endblock%}
+
+{%block script%}
+<script src="/js/deploy.js"></script>
 {%endblock%}

@@ -11,8 +11,10 @@
 ## **dưới đây là hướng dẫn sử dụng cũng như demo sản phẩm của nhóm 3**
 
 ### **cấu trúc**:
-dưới đây là sơ lược về cấu trúc của hệ thống
-![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/filestructure.png)
+dưới đây là sơ lược về cấu trúc của hệ thống<br/>
+
+![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/filestructure.png)<br/>
+
 - **code back-end**:
 app.py <br/>
 

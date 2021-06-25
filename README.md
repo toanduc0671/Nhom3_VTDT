@@ -42,14 +42,14 @@ $ flask run
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/homepage.png)
 
 - upload
-+ tại đây là nơi người dùng upload file để triển khai hệ thống bằng ansible
+tại đây là nơi người dùng upload file để triển khai hệ thống bằng ansible, có 3 lựa chọn lần lượt là upload inventory, playbook và role<br>
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/upload.png)
 
-
-+ có 3 lựa chọn lần lượt là upload inventory, playbook và role
-lần lượt với dạng file là inventory thì hệ thống sẽ upload file đồng thời check connection với các managed node trong file inventory sau đó trả kết quả qua pop-up trên web<br>
-
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/uploadTypefile.png) <br>
+
+tương ứng, với dạng file là inventory thì hệ thống sẽ upload file đồng thời check connection với các managed node trong file inventory sau đó trả kết quả qua pop-up trên web<br>
+
+
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/connectionStatus.png)
 
 nếu dạng file là role thì người dùng sẽ upload file zip sau đó hệ thống sẽ tự động giải nén<br>

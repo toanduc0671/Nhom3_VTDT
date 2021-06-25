@@ -12,15 +12,17 @@
 
 ### **cấu trúc**:
 dưới đây là sơ lược về cấu trúc của hệ thống
-- code back-end: app.py
+![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/filestructure.png)
+- **code back-end**:
+app.py <br/>
 
-- front-end: 
+- **front-end**: 
 
 templates <br>
 ./static/css (giao diện) <br>
 ./static/js (xử lý logic front-end) <br>
 
-- ./static/savefile: file của người dùng up lên sẽ được lưu ở đây
+- **./static/savefile**: file của người dùng up lên sẽ được lưu ở đây
 
 ### **run**:
 

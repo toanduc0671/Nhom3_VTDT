@@ -2,8 +2,12 @@ import os
 import fnmatch
 import json
 import re
-from flask import Flask, render_template
+from flask import Flask, render_template, url_for
 from flask import request, redirect
+from ara.clients.offline import AraOfflineClient
+
+client = AraOfflineClient()
+
 
 app = Flask(__name__, static_url_path='',
             static_folder='static', template_folder='templates')
@@ -107,11 +111,66 @@ def deploy():
     # Không cần kiểm tra file tồn tại vì file đã select từ list route ở trên
     input_inventory = request.form['inventorySelect']
     input_playbook = request.form['playbookSelect']
-
+    os.system("export ANSIBLE_CALLBACK_PLUGINS=$(python3 -m ara.setup.callback_plugins)")
     os.system("ansible-playbook -i " + path_to_savefile + "/" + input_inventory +
               " " + path_to_savefile + "/" + input_playbook + " > gg.txt")
 
     return json.dumps({"deploy status": True})
+
+
+# Ansible ara
+@app.route('/playbook/<plb_id>', methods = ["GET","POST"])
+def results(plb_id):
+    # playbooks = client.get("/api/v1/playbooks")
+    data_list = []
+    # Get detail a bout task in playbook
+
+    results = client.get("/api/v1/results?playbook=%s" % plb_id)
+    hosts = client.get("/api/v1/hosts?playbook=%s" % plb_id)
+    files = client.get("/api/v1/files?playbook=%s" % plb_id)
+
+    host_list = []
+    for host in hosts["results"]:
+        host_list.append(host["name"])
+
+    file_list = []
+    for file in files["results"]:
+        file_list.append(file["path"])
+
+    # For each result, print the task and host information
+    for result in results["results"]:
+        task = client.get("/api/v1/tasks/%s" % result["task"])
+        host = client.get("/api/v1/hosts/%s" % result["host"])
+        
+        data = {
+            "id": task["id"],
+            "timestamp": result["ended"],
+            "host": host["name"],
+            "action": task["action"],
+            "task": task["name"],
+            "status": task["status"],
+            "duration": task["duration"],
+            "task_file": task["path"],
+        }
+        data_list.append(data)
+    data_list.append(host_list)
+    data_list.append(file_list)
+    return json.dumps(data_list)
+
+
+@app.route('/playbooks', methods = ["GET","POST"])
+def playbooks():
+    if request.method == "GET":
+        playbooks = client.get("/api/v1/playbooks")
+        data_list = []
+        return render_template("detail.html", playbooks = json.dumps(playbooks["results"][0]))
+    elif request.method == "POST":
+        # if request.form.get("action") == "check_detail" :
+        playbooks = client.get("/api/v1/playbooks")
+        get_Playbooks = playbooks["results"]
+        # get playbook index from form submit to get playbook id to view detail  
+        playbook_id = str(get_Playbooks[0]["id"])
+        return redirect(url_for('results', plb_id = playbook_id))
 
 
 if __name__ == "__main__":

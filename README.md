@@ -26,6 +26,24 @@ templates <br>
 
 - **./static/savefile**: file của người dùng up lên sẽ được lưu ở đây
 
+### **Cài đặt ara-ansible**:
+Để lưu lại lịch sử deploy của playbook chúng ta sử dụng một thư viện `Ara-Ansible`.
+Trong repo này chúng ta thực hiện cài đặt và sử dụng `ara-ansible` không sử dụng API server
+```
+# Cài đặt Ansible và Ara
+$ python3 -m pip install --user ansible "ara[server]"
+
+# Cấu hình Ansible để sử dụng ARA callback plugin
+$ export ANSIBLE_CALLBACK_PLUGINS="$(python3 -m ara.setup.callback_plugins)"
+
+# Khởi động máy chủ đã được tích hợp sẵn để hiển thị các kết quả ara ansible ghi được trên giao diện web:
+$ ara-manage runserver
+```
+![](/image/ara-server.jpg)
+
+=> Web UI:
+![](/image/ara-web.jpg)
+
 ### **run**:
 
 Tại thư mục gốc chúng ta có thể run web với câu lệnh:<br/>

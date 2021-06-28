@@ -148,7 +148,7 @@ def results(plb_id):
             "host": host["name"],
             "action": task["action"],
             "task": task["name"],
-            "status": task["status"],
+            "status": result["status"],
             "duration": task["duration"],
             "task_file": task["path"],
         }

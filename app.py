@@ -111,7 +111,7 @@ def deploy():
     # Không cần kiểm tra file tồn tại vì file đã select từ list route ở trên
     input_inventory = request.form['inventorySelect']
     input_playbook = request.form['playbookSelect']
-    os.system("export ANSIBLE_CALLBACK_PLUGINS=$(python3 -m ara.setup.callback_plugins)")
+    os.system('export ANSIBLE_CALLBACK_PLUGINS="$(python3 -m ara.setup.callback_plugins)"')
     os.system("ansible-playbook -i " + path_to_savefile + "/" + input_inventory +
               " " + path_to_savefile + "/" + input_playbook + " > gg.txt")
 

@@ -1,3 +1,9 @@
+| Circle CI  | GitHub Action |   Travis CI |
+| ---------- | -------------  | ------------|
+|
+[![CircleCI](https://circleci.com/gh/4ward110/Nhom3_VTDT/tree/vu-duc-long.svg?style=svg)](https://github.com/4ward110/Nhom3_VTDT/tree/vu-duc-long)|
+||
+
 # **Giới thiệu và hướng dẫn sử dụng sản phẩm triển khai tự động hoá Ansible qua giao diện web**
 
 ## **Khái quát về đề tài**
@@ -87,3 +93,53 @@ nhóm thực hiện demo với bài thực hành tuần 2 trong chương trình 
 kết quả thu được:
 
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/result.png)
+
+
+### Tích hợp Circle CI:
+![](/image/c.png)
+#### A. Overview:
+- CircleCI là một tool để thực hiện CI
+- Cách thực hiện khá đơn giản, quan sát trực quan trên giao diện web
+- Circle CI bản chất sử dụng Docker, trong file cấu hình ta sẽ chỉ định các`docker image` và các `job` . Trong các `job` sẽ có các `step`, trong các step cụ thể là các `command`.
+- Quá trình chạy 1 job trên CircleCI:
+    1. Khi dev push or merge vào một branch, circleCI sẽ tự biết event đó và khởi động job đc đặt tương ứng.
+    2. Ban đầu Circle CI sẽ pull các image cần thiết vê và run trên môi trường cloud của nó.
+    3. Sau đó chạy các `step` đã được cài đặt(thông thường step đầu tiên sẽ là checkout để lấy source code về)
+    4. Các step tiếp theo chạy dựa trên file `config`
+    5. Sau khi chạy hết các step, các job. Nếu có lỗi thì mình sẽ nhận được thông báo `failed` tại `email`.
+#### B. Tích hợp vào project
+1. Đăng nhập vào Circle CI
+- Bạn đăng kí tài khoản và đăng nhâp vào circleci (đăng nhâp dựa theo tài khoảng github/bitbucket)
+tại [https://circleci.com/signup/](https://circleci.com/signup/)
+- Trên giao diện này ta có thể browse các project trên tài khoản github của mình và team, setup Circle CI, theo dõi các job ,...
+2. Setup circleCI cho project
+- Trên Web UI chọn Project tại thanh công cụ bên phải => chọn Setup project.
+![](/image/ch.jpg)
+- Circle CI sẽ hiển thị các gợi ý file config dựa trên project của bạn. Các bạn tạo file. `.Circleci/config.yml` tại local và push lên github .
+ví dụ về file `config.yml` sử dụng trong project này:
+```
+version: 2.1
+orbs:
+  python: circleci/python@1.2
+workflows:
+  sample:  
+    jobs:
+      - Test
+jobs:
+  Test:  
+    docker:
+      - image: cimg/python:3.8
+    steps:
+      - checkout
+      - python/install-packages:
+          pkg-manager: pip
+      - run:
+          name: Run tests
+          command: pytest
+```
+- Mọi người cần thêm thêm các file test và list các package requirement trong project tại file `requirement.txt`.
+
+- Theo dõi trên CircleCI chúng ta sẽ theo dõi được quá trình thực hiện CI. và debug được dễ dàng.
+=> Ket qua:
+![](/image/r.jpg)
+![](/image/s.jpg)

@@ -12,11 +12,6 @@ jobs:
   Test:  
     docker:
       - image: cimg/python:3.8
-    # Checkout the code as the first step. This is a dedicated CircleCI step.
-    # The python orb's install-packages step will install the dependencies from a Pipfile via Pipenv by default.
-    # Here we're making sure we use just use the system-wide pip. By default it uses the project root's requirements.txt.
-    # Then run your tests!
-    # CircleCI will report the results back to your VCS provider.
     steps:
       - checkout
       - python/install-packages:

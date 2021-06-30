@@ -5,6 +5,7 @@ import re
 from flask import Flask, render_template, url_for
 from flask import request, redirect
 from ara.clients.offline import AraOfflineClient
+import pandas as pd
 
 client = AraOfflineClient()
 
@@ -30,7 +31,7 @@ def upload():
 
 # Chỉ upload file inventory và return về connection status format json
 @app.route('/upload_inventory', methods=["POST"])
-def inventory():
+def upload_inventory():
     # Không cần kiểm tra file có hay không, đã valid ở front end
     file = request.files["file"]
     file.save(os.path.join(app.config["UPLOADS"], file.filename))
@@ -72,7 +73,7 @@ def inventory():
 
 # Chỉ upload file playbook và return về upload status format json
 @app.route('/upload_playbook', methods=["POST"])
-def playbook():
+def upload_playbook():
     # Không cần kiểm tra file có hay không, đã valid ở front end
     file = request.files["file"]
     file.save(os.path.join(app.config["UPLOADS"], file.filename))
@@ -82,7 +83,7 @@ def playbook():
 
 # Chỉ upload file role và return về upload status format json
 @app.route('/upload_role', methods=["POST"])
-def role():
+def upload_role():
     # Không cần kiểm tra file có hay không, đã valid ở front end
     file = request.files["file"]
     file.save(os.path.join(app.config["UPLOADS"], file.filename))
@@ -111,7 +112,8 @@ def deploy():
     # Không cần kiểm tra file tồn tại vì file đã select từ list route ở trên
     input_inventory = request.form['inventorySelect']
     input_playbook = request.form['playbookSelect']
-    os.system("export ANSIBLE_CALLBACK_PLUGINS=$(python3 -m ara.setup.callback_plugins)")
+    os.system(
+        "export ANSIBLE_CALLBACK_PLUGINS=$(python3 -m ara.setup.callback_plugins)")
     os.system("ansible-playbook -i " + path_to_savefile + "/" + input_inventory +
               " " + path_to_savefile + "/" + input_playbook + " > gg.txt")
 
@@ -119,59 +121,119 @@ def deploy():
 
 
 # Ansible ara
-@app.route('/playbook/<plb_id>', methods = ["GET","POST"])
-def results(plb_id):
-    # playbooks = client.get("/api/v1/playbooks")
-    data_list = []
-    # Get detail a bout task in playbook
-
+# Trả về tast result và host result của playbook
+@app.route('/history/playbooks/<plb_id>', methods=["GET"])
+def playbook(plb_id):
+    # Get data from api
     results = client.get("/api/v1/results?playbook=%s" % plb_id)
-    hosts = client.get("/api/v1/hosts?playbook=%s" % plb_id)
-    files = client.get("/api/v1/files?playbook=%s" % plb_id)
+    tasks = client.get("/api/v1/tasks", playbook=plb_id)
+    hosts = client.get("/api/v1/hosts", playbook=plb_id)
 
-    host_list = []
-    for host in hosts["results"]:
-        host_list.append(host["name"])
+    if results["count"] == 0 or tasks["count"] == 0 or hosts["count"] == 0:
+        return json.dumps({"count" : 0})
 
-    file_list = []
-    for file in files["results"]:
-        file_list.append(file["path"])
+    # Convert to dataframe
+    tasks = pd.DataFrame(tasks["results"]).set_index("id")
+    hosts = pd.DataFrame(hosts["results"]).set_index("id")
 
-    # For each result, print the task and host information
+    data = {'status': [],
+            'host': [],
+            'action': [],
+            'task': [],
+            'duration': [],
+            'timestamp': []}
+
+    # For each result information
     for result in results["results"]:
-        task = client.get("/api/v1/tasks/%s" % result["task"])
-        host = client.get("/api/v1/hosts/%s" % result["host"])
-        
-        data = {
-            "id": task["id"],
-            "timestamp": result["ended"],
-            "host": host["name"],
-            "action": task["action"],
-            "task": task["name"],
-            "status": task["status"],
-            "duration": task["duration"],
-            "task_file": task["path"],
-        }
-        data_list.append(data)
-    data_list.append(host_list)
-    data_list.append(file_list)
-    return json.dumps(data_list)
+        idTask = result["task"]
+        idHost = result["host"]
+
+        data["status"].append(result["status"])
+        data["host"].append(hosts.loc[idHost]["name"])
+        data["action"].append(tasks.loc[idTask]["action"])
+        data["task"].append(tasks.loc[idTask]["name"])
+        data["duration"].append(result["duration"])
+        data["timestamp"].append(result["ended"])
+
+    # Convert
+    taskResult = pd.DataFrame(data, dtype="string")
+
+    # Process hostResult
+    hostResult = taskResult.groupby(
+        ['host', 'status']).size().reset_index(name='counts')
+    hostResult = hostResult.sort_values(by=['host'])
+    temp = dict()
+    for index, row in hostResult.iterrows():
+        if (index == 0) or (index > 0 and nameHost != row['host']):
+            nameHost = row['host']
+            temp[nameHost] = dict()
+
+        temp[nameHost][row["status"]] = row["counts"]
+
+    # Combination to 1 json
+    result = dict()
+    result["count"] = taskResult.shape[0]
+    
+    result["hostResult"] = temp
+    
+    taskResult = json.loads(taskResult.to_json(orient="records"))
+    result["taskResult"] = taskResult
+
+    # Convert to json
+    return json.dumps(result)
 
 
-@app.route('/playbooks', methods = ["GET","POST"])
-def playbooks():
+# Lấy thông tin playbook mới nhất
+@app.route('/history/lastplaybook', methods=["GET"])
+def lastPlaybook():
     if request.method == "GET":
-        playbooks = client.get("/api/v1/playbooks")
-        data_list = []
-        return render_template("detail.html", playbooks = json.dumps(playbooks["results"][0]))
-    elif request.method == "POST":
-        # if request.form.get("action") == "check_detail" :
-        playbooks = client.get("/api/v1/playbooks")
-        get_Playbooks = playbooks["results"]
-        # get playbook index from form submit to get playbook id to view detail  
-        playbook_id = str(get_Playbooks[0]["id"])
-        return redirect(url_for('results', plb_id = playbook_id))
+        playbook = client.get("/api/v1/playbooks", limit=1)
 
+        # init
+        temp = dict()
+        temp["count"] = playbook["count"]
+
+        if playbook["count"] != 0:
+            temp["id"] = playbook["results"][0]["id"]
+            temp["status"] = playbook["results"][0]["status"]
+            temp["ansible_version"] = playbook["results"][0]["ansible_version"]
+
+        return json.dumps(temp)
+        
+@app.route('/file', methods=["GET"])
+def file():
+    return render_template("file.html")
+
+# Trả về File và nội dung
+@app.route('/fileContent', methods=["GET"])
+def getFilesContent():
+    result = dict()
+
+    # Inventory
+    result["inventory"] = dict()
+    for i in fnmatch.filter(os.listdir(app.config["UPLOADS"]), "*.ini"):
+        with open("./static/savefile/%s" % i, "r") as f:
+            result["inventory"][i] = f.read()
+
+    # Playbook
+    result["playbook"] = dict()
+    for i in fnmatch.filter(os.listdir(app.config["UPLOADS"]), "*.yml"):
+        with open("./static/savefile/%s" % i, "r") as f:
+            result["playbook"][i] = f.read()
+
+    result["roles"] = dict()
+    # Tên các role
+    for i in os.listdir(app.config["UPLOADS"] + "/roles"):
+        result["roles"][i] = dict()
+        # Tên các thư mục trong mỗi role
+        for j in os.listdir(app.config["UPLOADS"] + "/roles/%s" % i):
+            result["roles"][i][j] = dict()
+            # Đọc từng file
+            for k in os.listdir(app.config["UPLOADS"] + "/roles/%s/%s" % (i, j)):
+                with open(app.config["UPLOADS"] + "/roles/%s/%s/%s" % (i, j, k), "r") as f:
+                    result["roles"][i][j][k] = f.read()
+
+    return json.dumps(result)
 
 if __name__ == "__main__":
     app.run(debug=True)

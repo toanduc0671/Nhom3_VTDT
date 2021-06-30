@@ -1,3 +1,14 @@
+/* Remove button focus */
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* All delay classes will take half the time to start */
+:root {
+  --animate-delay: 0.07s;
+}
+
 .file-upload input[type='file'] {
     display: none;
 }

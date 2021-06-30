@@ -1,0 +1,10 @@
+/* Remove button focus */
+.btn:focus {
+    outline: none;
+    box-shadow: none;
+}
+
+#intro {
+    font-size: 17px;
+    height: 55vh;
+}

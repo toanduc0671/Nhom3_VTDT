@@ -18,16 +18,19 @@ dưới đây là sơ lược về cấu trúc của hệ thống<br/>
 
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/filestructure.png)<br/>
 
-- **code back-end**:
-app.py <br/>
-
-- **front-end**: 
-
-templates <br>
-./static/css (giao diện) <br>
-./static/js (xử lý logic front-end) <br>
-
-- **./static/savefile**: file của người dùng up lên sẽ được lưu ở đây
+├── **app.py**  (code back-end) <br/>
+├── **gg.txt**  (Log terminal output) <br/>
+├── **templates**  (bootstrap front-end) <br/>
+├&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── deploy.html <br/>
+├&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── file.html <br/>
+├&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── home.html <br/>
+├&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── layout.html <br/>
+├&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; └── upload.html <br/>
+└── **static** <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── **savefile**  (vị trí lưu file người dùng upload) <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── **svg**<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── **js**<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; └── **css**<br/>
 
 ### **Cài đặt ara-ansible**:
 Để lưu lại lịch sử deploy của playbook chúng ta sử dụng một thư viện `Ara-Ansible`.

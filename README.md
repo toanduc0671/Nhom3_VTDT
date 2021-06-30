@@ -63,11 +63,11 @@ $ flask run
 
 - **Homepage**<br/>
 
-![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/homepage.png)
+![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/homepage1.png)<br/>
+![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/homepage2.png)
 
 - **upload**<br/>
 tại đây là nơi người dùng upload file để triển khai hệ thống bằng ansible, có 3 lựa chọn lần lượt là upload inventory, playbook và role<br>
-![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/upload.png)
 
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/uploadTypefile.png) <br>
 

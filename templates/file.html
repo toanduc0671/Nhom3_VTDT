@@ -1,0 +1,44 @@
+{%extends "layout.html"%}
+
+{%block css%}
+<link rel="stylesheet" href="/css/file.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.1/build/styles/base16/eva-dim.min.css">
+{%endblock%}
+
+{% block content %}
+<section>
+    <div class="container mt-5 pt-3" id="inventory">
+        <div class="card">
+            <div class="card-header">
+                <h5>Inventories</h5>
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3 pt-3" id="playbook">
+        <div class="card">
+            <div class="card-header">
+                <h5>Playbooks</h5>
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+    <div class="container mt-3 pt-3" id="role">
+        <div class="card">
+            <div class="card-header">
+                <h5>Roles</h5>
+            </div>
+            <div class="card-body">
+            </div>
+        </div>
+    </div>
+</section>
+{%endblock%}
+
+{%block script%}
+<script src="https://stevenlevithan.com/assets/misc/date.format.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/highlightjs/cdn-release@11.0.0/build/highlight.min.js"></script>
+<script src="/js/file.js"></script>
+{%endblock%}

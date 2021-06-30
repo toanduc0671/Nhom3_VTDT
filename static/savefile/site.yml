@@ -1,4 +1,22 @@
 ---
+- name: Install Docker mariadb
+  hosts: mariadb
+  gather_facts: false
+  roles:
+    - docker
+
+- name: Install Docker wp
+  hosts: wordpress
+  gather_facts: false
+  roles:
+    - docker
+
+- name: Install wp
+  hosts: wordpress
+  gather_facts: false
+  roles:
+    - wordpress
+
 - name: Install mariadb
   hosts: mariadb
   gather_facts: false

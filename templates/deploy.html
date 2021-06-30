@@ -42,10 +42,63 @@
         </div>
       </div>
     </div>
+    <!-- Result part -->
+    <div class="container p-0 mb-5" id="host-result" hidden>
+      <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+          <div class="card bg-white shadow rounded-lg">
+            <div class="card-header bg-light">
+              <h5>Hosts</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Hostname</th>
+                    <th scope="col">Results</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid p-0 mb-5" id="task-result" hidden>
+      <div class="row justify-content-md-center">
+        <div class="col-md-auto">
+          <div class="card bg-white shadow rounded-lg">
+            <div class="card-header bg-light">
+              <h5>Task result</h5>
+            </div>
+            <div class="card-body">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">Status</th>
+                    <th scope="col">Host</th>
+                    <th scope="col">Action</th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Duration</th>
+                    <th scope="col">Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </section>
 </div>
 {%endblock%}
 
 {%block script%}
+<script src="https://stevenlevithan.com/assets/misc/date.format.js"></script>
 <script src="/js/deploy.js"></script>
 {%endblock%}

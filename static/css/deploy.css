@@ -48,3 +48,44 @@
     transform: rotate(1turn);
   }
 }
+
+/* Remove button focus */
+.btn:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+/* Result part */
+.tag {
+  margin-right: 0.6rem;
+  padding-left: .6rem;
+  padding-right: .6rem;
+  border-radius: 12rem;
+  color: #ffffff;
+  font-weight: bold;
+}
+
+.ok {
+  background-color: #02aff1;
+}
+
+.failed {
+  background-color: #e74c3c;
+}
+
+.skipped {
+  background-color: #00bc8c;
+}
+
+.unreachable {
+  background-color: #e74c3c;
+}
+
+.changed {
+  background-color: #f39c12;
+}
+
+/* Result */
+#task-result, #host-result {
+  font-size: 15px;
+}

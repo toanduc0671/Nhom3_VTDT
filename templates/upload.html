@@ -1,6 +1,7 @@
 {%extends "layout.html"%}
 
 {%block css%}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
 <link rel="stylesheet" href="/css/upload.css">
 {%endblock%}
 
@@ -15,7 +16,7 @@
               Select file to upload
             </h6>
 
-            <img src="/svg/upload-image.svg" alt="upload Image" width="200" class="d-block mx-auto mb-4 rounded-pill">
+            <img src="/svg/upload-image.svg" alt="upload Image" width="200" class="d-block mx-auto mb-4 rounded-pill animate__animated animate__bounceInUp">
 
             <form id="uploadform" method="POST" enctype="multipart/form-data">
               

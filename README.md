@@ -66,36 +66,36 @@ $ flask run
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/homepage2.png)
 
 - **upload**<br/>
-tại đây là nơi người dùng upload file để triển khai hệ thống bằng ansible, có 3 lựa chọn lần lượt là upload inventory, playbook và role<br>
+1. tại đây là nơi người dùng upload file để triển khai hệ thống bằng ansible, có 3 lựa chọn lần lượt là upload inventory, playbook và role<br>
 
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/uploadTypefile.png) <br>
 
-tương ứng, với dạng file là inventory thì hệ thống sẽ upload file đồng thời check connection với các managed node trong file inventory sau đó trả kết quả qua pop-up trên web<br>
+2. tương ứng, với dạng file là inventory thì hệ thống sẽ upload file đồng thời check connection với các managed node trong file inventory sau đó trả kết quả qua pop-up trên web<br>
 
 
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/connectionStatus.png)
 
-nếu dạng file là role thì người dùng sẽ upload file zip sau đó hệ thống sẽ tự động giải nén<br>
+3. nếu dạng file là role thì người dùng sẽ upload file zip sau đó hệ thống sẽ tự động giải nén<br>
 
 - deploy
 
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/deploy.png)
 
-tại đây người dùng chọn file inventory và playbook để tiến hành quá trình cài đặt hệ thống trên các managed node <br>
+1. tại đây người dùng chọn file inventory và playbook để tiến hành quá trình cài đặt hệ thống trên các managed node <br>
 
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/choosePlaybook.png)
 
-Nhấn **Deploy** và hệ thống sẽ bắt đầu quá trình cài đặt<br>
+2. Nhấn **Deploy** và hệ thống sẽ bắt đầu quá trình cài đặt<br>
 
 nhóm thực hiện demo với bài thực hành tuần 2 trong chương trình VTDT: deploy wordpress trên 2 máy ảo. Một VM cài đặt image mariadb một VM cài đặt wordpress 
 
-kết quả thu được:
+3. kết quả thu được:
 
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/result.png)
 
 ### Tích hợp Circle CI, Travis CI và GitHub Actions:
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/63b3d6496c7cf0c628dcb14cbb682ed5aebfb595/image/c.png)
-#### A. Overview:
+#### A. Overview Circle CI:
 - CircleCI là một tool để thực hiện CI
 - Cách thực hiện khá đơn giản, quan sát trực quan trên giao diện web
 - Circle CI bản chất sử dụng Docker, trong file cấu hình ta sẽ chỉ định các`docker image` và các `job` . Trong các `job` sẽ có các `step`, trong các step cụ thể là các `command`.
@@ -135,9 +135,41 @@ jobs:
           name: Run tests
           command: pytest
 ```
-- Mọi người cần thêm thêm các file test và list các package requirement trong project tại file `requirement.txt`.
+- Mọi người cần thêm các file test và list các package requirement trong project tại file `requirement.txt`.
 
 - Theo dõi trên CircleCI chúng ta sẽ theo dõi được quá trình thực hiện CI. và debug được dễ dàng.
-=> Ket qua:
+=> Kết quả:
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/63b3d6496c7cf0c628dcb14cbb682ed5aebfb595/image/r.jpg)
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/63b3d6496c7cf0c628dcb14cbb682ed5aebfb595/image/s.jpg)
+
+#### A. Overview Travis CI:
+![]()
+- Travis-ci là một dự án mã nguồn mở, được xây dựng đầy đủ các tính năng CI, giúp chúng ta dễ dàng test và deploy các dự án được lưu trữ trên GitHub
+- Mô hình hoạt động của Travis-ci:
+![]()
+  1. Developer sẽ push code lên github
+  2. Thông qua webhooks, Travis-ci sẽ biết được có code mới được commit, nó sẽ pull code đó về
+  3. Dựa vào file cấu hình .travis.ym travis sẽ tiến hành chạy và thông báo trở ngược lại cho người dùng.
+
+#### B. Tích hợp vào project:
+
+1. đăng nhập vào travis-ci.com, travis sẽ yêu cầu đồng bộ với github.
+2. Nhấn vào Activate tại mục Repositories để cấp quyền truy cập vào tất cả repo hoặc repo nhất định trên github.
+![]()
+3. tạo file .travis.yml
+```
+language: python
+python:
+  - "3.6.7"
+install:
+  - pip install -r requirements.txt
+# command to run tests
+script:
+  - pytest
+```
+
+- ở đây nhiệm vụ của `.travis.yml` cũng tương tự với `config.yml` ở phần Circle CI bên trên là cài đặt dependencies trong `requirement.txt` và chạy `pytest`. 
+
+- commit và push file .travis.yml lên thư mục gốc của repository và truy cập vào [https://travis-ci.com/github/#username/#repoName](https://travis-ci.com) để xem kết quả.
+
+![]()

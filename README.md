@@ -172,3 +172,41 @@ script:
 - commit và push file .travis.yml lên thư mục gốc của repository và truy cập vào [https://travis-ci.com/github/#username/#repoName](https://travis-ci.com) để xem kết quả.
 
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/travis_build_result.png)
+
+#### A. Overview GitHub Actions:
+![]()
+1. Github Actions cho phép chúng ta tạo `workflows` cho dự án trực tiếp trên Github repository của chúng ta.
+2. Github Actions giúp tự động hóa quy trình phát triển phần mềm kết hợp với pull request và issues. Chúng ta có thể viết các tác vụ riêng lẻ, được gọi là các actions và kết hợp các actions đó lại với nhau để tạo ra một workflow theo ý muốn. Workflow là các tiến trình tự động cần có để thiết lập trong repository của mình để build, test, publish package, release, hoặc deploy dự án nào đó trên Github.
+3. Với Github Actions chúng ta có thể tích hợp continuous integration (CI) và continuous deployment (CD) trực tiếp trên repository của mình.
+#### B. Sử dụng GitHub Actions
+1. cách sử dụng github actions rất đơn giản, chúng ta có thể tạo ra workflows theo cấu trúc file `.github/workflows/#tenfile.yml` 
+2. ở repository này nhóm tạo file `Git_CI.yml` và tích hợp test `pep8` cho code của project.
+```
+name: autopep8
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: autopep8
+        uses: peter-evans/autopep8@v1.2.1
+        with:
+          args: --recursive --in-place --aggressive --aggressive
+
+``` 
+#### giới thiệu sơ qua về pep8:
+- Python Enhancement Proposal #8 (thường được viết tắt PEP-8), là tập hợp các chỉ dẫn về định dạng code, phong cách lập trình được chia sẻ chung giữa các lập trình viên Python. PEP-8 được đề xuất bởi các chuyên gia trong "hội đồng" sáng lập ngôn ngữ lập trình Python. Việc viết code theo đúng chuẩn chung PEP-8 sẽ giúp cho các lập trình viên dễ dàng hơn khi đọc code của nhau.
+
+- Xem kết quả test tại tab 
+<svg class="octicon octicon-play UnderlineNav-octicon d-none d-sm-inline" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zM6.379 5.227A.25.25 0 006 5.442v5.117a.25.25 0 00.379.214l4.264-2.559a.25.25 0 000-.428L6.379 5.227z"></path></svg>
+Actions.
+
+![]()

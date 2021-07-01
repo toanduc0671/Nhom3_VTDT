@@ -1,4 +1,4 @@
-name: MATLAB Build
+name: Format python code
 on:
   push:
     branches: [ main ]
@@ -12,8 +12,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Setup MATLAB
-        uses: matlab-actions/setup-matlab@v0
-
-      - name: Run all tests
-        uses: matlab-actions/run-tests@v0
+      - name: autopep8
+        uses: peter-evans/autopep8@v1
+        with:
+          args: --recursive --in-place --aggressive --aggressive
+          
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: autopep8 action fixes

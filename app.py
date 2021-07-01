@@ -14,7 +14,7 @@ app = Flask(__name__, static_url_path='',
             static_folder='static', template_folder='templates')
 
 path_to_savefile = "./static/savefile"
-gg = "gg.txt"
+gg = "./static/savefile/log.txt"
 app.config["UPLOADS"] = path_to_savefile
 
 
@@ -115,7 +115,7 @@ def deploy():
     os.system(
         "export ANSIBLE_CALLBACK_PLUGINS=$(python3 -m ara.setup.callback_plugins)")
     os.system("ansible-playbook -i " + path_to_savefile + "/" + input_inventory +
-              " " + path_to_savefile + "/" + input_playbook + " > gg.txt")
+              " " + path_to_savefile + "/" + input_playbook + " > " + gg)
 
     return json.dumps({"deploy status": True})
 

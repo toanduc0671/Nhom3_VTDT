@@ -146,11 +146,10 @@ jobs:
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/travisci.jpg)
 - Travis-ci là một dự án mã nguồn mở, được xây dựng đầy đủ các tính năng CI, giúp chúng ta dễ dàng test và deploy các dự án được lưu trữ trên GitHub
 - Mô hình hoạt động của Travis-ci:
-![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/travisvi_workflow.png)
   1. Developer sẽ push code lên github
   2. Thông qua webhooks, Travis-ci sẽ biết được có code mới được commit, nó sẽ pull code đó về
   3. Dựa vào file cấu hình .travis.ym travis sẽ tiến hành chạy và thông báo trở ngược lại cho người dùng.
-
+![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/travisvi_workflow.png)
 #### B. Tích hợp vào project:
 
 1. đăng nhập vào travis-ci.com, travis sẽ yêu cầu đồng bộ với github.

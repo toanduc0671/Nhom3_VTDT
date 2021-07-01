@@ -1,6 +1,6 @@
 | Travis CI™ | GitHub® Actions | CircleCI® |
 | ----------- | ----------- | ----------- |
-| [![Build Status](https://travis-ci.com/toanduc0671/Nhom3_VTDT.svg)](https://travis-ci.com/toanduc0671/Nhom3_VTDT) | [![MATLAB](https://github.com/toanduc0671/Nhom3_VTDT/actions/workflows/Git_CI.yml/badge.svg)](https://github.com/toanduc0671/Nhom3_VTDT/actions/workflows/Git_CI.yml) | [![CircleCI](https://circleci.com/gh/4ward110/Nhom3_VTDT/tree/vu-duc-long.svg?style=svg)](https://github.com/4ward110/Nhom3_VTDT/tree/vu-duc-long) |
+| [![Build Status](https://travis-ci.com/toanduc0671/Nhom3_VTDT.svg)](https://travis-ci.com/toanduc0671/Nhom3_VTDT) | [![PEP8](https://github.com/toanduc0671/Nhom3_VTDT/actions/workflows/Git_CI.yml/badge.svg)](https://github.com/toanduc0671/Nhom3_VTDT/actions/workflows/Git_CI.yml) | [![CircleCI](https://circleci.com/gh/4ward110/Nhom3_VTDT/tree/vu-duc-long.svg?style=svg)](https://github.com/4ward110/Nhom3_VTDT/tree/vu-duc-long) |
 # **Giới thiệu và hướng dẫn sử dụng sản phẩm triển khai tự động hoá Ansible qua giao diện web**
 
 ## **Khái quát về đề tài**

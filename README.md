@@ -174,7 +174,7 @@ script:
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/travis_build_result.png)
 
 #### A. Overview GitHub Actions:
-![]()
+![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/githubaction.png)
 1. Github Actions cho phép chúng ta tạo `workflows` cho dự án trực tiếp trên Github repository của chúng ta.
 2. Github Actions giúp tự động hóa quy trình phát triển phần mềm kết hợp với pull request và issues. Chúng ta có thể viết các tác vụ riêng lẻ, được gọi là các actions và kết hợp các actions đó lại với nhau để tạo ra một workflow theo ý muốn. Workflow là các tiến trình tự động cần có để thiết lập trong repository của mình để build, test, publish package, release, hoặc deploy dự án nào đó trên Github.
 3. Với Github Actions chúng ta có thể tích hợp continuous integration (CI) và continuous deployment (CD) trực tiếp trên repository của mình.
@@ -205,8 +205,5 @@ jobs:
 #### giới thiệu sơ qua về pep8:
 - Python Enhancement Proposal #8 (thường được viết tắt PEP-8), là tập hợp các chỉ dẫn về định dạng code, phong cách lập trình được chia sẻ chung giữa các lập trình viên Python. PEP-8 được đề xuất bởi các chuyên gia trong "hội đồng" sáng lập ngôn ngữ lập trình Python. Việc viết code theo đúng chuẩn chung PEP-8 sẽ giúp cho các lập trình viên dễ dàng hơn khi đọc code của nhau.
 
-- Xem kết quả test tại tab 
-<svg class="octicon octicon-play UnderlineNav-octicon d-none d-sm-inline" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path fill-rule="evenodd" d="M1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0zM8 0a8 8 0 100 16A8 8 0 008 0zM6.379 5.227A.25.25 0 006 5.442v5.117a.25.25 0 00.379.214l4.264-2.559a.25.25 0 000-.428L6.379 5.227z"></path></svg>
-Actions.
-
-![]()
+- Xem kết quả test tại tab Actions trên repository.
+![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/githubaction_result.png)

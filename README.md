@@ -19,7 +19,6 @@ dưới đây là sơ lược về cấu trúc của hệ thống<br/>
 ![](https://raw.githubusercontent.com/toanduc0671/Nhom3_VTDT/main/image/filestructure.png)<br/>
 
 ├── **app.py**  (code back-end) <br/>
-├── **gg.txt**  (Log terminal output) <br/>
 ├── **templates**  (bootstrap front-end) <br/>
 ├&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── deploy.html <br/>
 ├&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; ├── file.html <br/>

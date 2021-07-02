@@ -16,6 +16,9 @@ jobs:
         uses: peter-evans/autopep8@v1.2.1
         with:
           args: --recursive --in-place --aggressive --aggressive app.py
+        env:
+          DEFAULT_BRANCH: main
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         
       - name: Fail if autopep8 made changes
         if: steps.autopep8.outputs.exit-code == 2

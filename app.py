@@ -1,4 +1,4 @@
-import os
+
 import fnmatch
 import json
 import re
@@ -234,10 +234,6 @@ def getFilesContent():
                     result["roles"][i][j][k] = f.read()
 
     return json.dumps(result)
-
-
-
-
 
 if __name__ == "__main__":
     app.run(debug=True)

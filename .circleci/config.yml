@@ -17,6 +17,7 @@ jobs:
       - python/install-packages:
           pkg-manager: pip
       - run:
-          name: Run tests
+          command: pip install -r CI_material/requirements.txt
           
+          name: Run tests
           command: pytest

@@ -120,11 +120,7 @@ def deploy():
     os.system(
         "export ANSIBLE_CALLBACK_PLUGINS=$(python3 -m ara.setup.callback_plugins)")
     os.system(
-        "ansible-playbook -i " +
-        path_to_savefile +
-        "/" +
-        input_inventory +
-        " " +
+        "ansible-playbook -i " + path_to_savefile + "/" + input_inventory + " " +
         path_to_savefile +
         "/" +
         input_playbook +
@@ -237,7 +233,6 @@ def getFilesContent():
     for i in fnmatch.filter(os.listdir(app.config["UPLOADS"]), "*.yml"):
         with open("./static/savefile/%s" % i, "r") as f:
             result["playbook"][i] = f.read()
-
     result["roles"] = dict()
     # Tên các role
     for i in os.listdir(app.config["UPLOADS"] + "/roles"):
@@ -251,11 +246,6 @@ def getFilesContent():
                     (i, j)):
                 with open(app.config["UPLOADS"] + "/roles/%s/%s/%s" % (i, j, k), "r") as f:
                     result["roles"][i][j][k] = f.read()
-
     return json.dumps(result)
-
-
-
-
 if __name__ == "__main__":
     app.run(debug=True)

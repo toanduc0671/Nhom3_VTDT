@@ -1,4 +1,4 @@
-# Giới thiệu và hướng dẫn sử dụng sản phẩm triển khai tự động hoá Ansible qua giao diện web
+# Triển khai tự động hoá Ansible qua giao diện web
 
 | Travis CI™ | GitHub® Actions | CircleCI® |
 | ----------- | ----------- | ----------- |

@@ -225,7 +225,7 @@ Kéo xuống dưới ta sẽ thấy thông tin chi tiết về deploy được c
 
 - Commit và push file .travis.yml lên thư mục gốc của repository và truy cập vào [https://travis-ci.com/github/#username/#repoName](https://travis-ci.com) để xem kết quả.
 
-![travis_build_result]./image/14.png)
+![travis_build_result](./image/14.png)
 
 ### C. GitHub Actions
 

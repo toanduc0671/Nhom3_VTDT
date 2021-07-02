@@ -43,7 +43,9 @@ def upload_inventory():
     def getStatus(logs):
         lstIp = list()
         for i in list(dict.fromkeys(logs.split())):
-            if re.findall(r"^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)(\.(?!$)|$)){4}$", i):
+            if re.findall(
+                r"^((25[0-5]|(2[0-4]|1\d|[1-9]|)\d)(\.(?!$)|$)){4}$",
+                    i):
                 lstIp.append(i)
 
         valueList = re.findall(r"SUCCESS|UNREACHABLE", logs)
@@ -58,7 +60,10 @@ def upload_inventory():
     flag = True
 
     # So sánh trực tiếp
-    if "UNREACHABLE" in str(status["status"]) or status == {"ip": [], "status": []}:
+    if "UNREACHABLE" in str(
+        status["status"]) or status == {
+        "ip": [],
+            "status": []}:
         flag = False
 
     # Cho thêm connection_status vào dict
@@ -114,8 +119,17 @@ def deploy():
     input_playbook = request.form['playbookSelect']
     os.system(
         "export ANSIBLE_CALLBACK_PLUGINS=$(python3 -m ara.setup.callback_plugins)")
-    os.system("ansible-playbook -i " + path_to_savefile + "/" + input_inventory +
-              " " + path_to_savefile + "/" + input_playbook + " > " + gg)
+    os.system(
+        "ansible-playbook -i " +
+        path_to_savefile +
+        "/" +
+        input_inventory +
+        " " +
+        path_to_savefile +
+        "/" +
+        input_playbook +
+        " > " +
+        gg)
 
     return json.dumps({"deploy status": True})
 
@@ -130,7 +144,7 @@ def playbook(plb_id):
     hosts = client.get("/api/v1/hosts", playbook=plb_id)
 
     if results["count"] == 0 or tasks["count"] == 0 or hosts["count"] == 0:
-        return json.dumps({"count" : 0})
+        return json.dumps({"count": 0})
 
     # Convert to dataframe
     tasks = pd.DataFrame(tasks["results"]).set_index("id")
@@ -173,9 +187,9 @@ def playbook(plb_id):
     # Combination to 1 json
     result = dict()
     result["count"] = taskResult.shape[0]
-    
+
     result["hostResult"] = temp
-    
+
     taskResult = json.loads(taskResult.to_json(orient="records"))
     result["taskResult"] = taskResult
 
@@ -199,12 +213,15 @@ def lastPlaybook():
             temp["ansible_version"] = playbook["results"][0]["ansible_version"]
 
         return json.dumps(temp)
-        
+
+
 @app.route('/file', methods=["GET"])
 def file():
     return render_template("file.html")
 
 # Trả về File và nội dung
+
+
 @app.route('/fileContent', methods=["GET"])
 def getFilesContent():
     result = dict()
@@ -229,11 +246,14 @@ def getFilesContent():
         for j in os.listdir(app.config["UPLOADS"] + "/roles/%s" % i):
             result["roles"][i][j] = dict()
             # Đọc từng file
-            for k in os.listdir(app.config["UPLOADS"] + "/roles/%s/%s" % (i, j)):
+            for k in os.listdir(
+                    app.config["UPLOADS"] + "/roles/%s/%s" %
+                    (i, j)):
                 with open(app.config["UPLOADS"] + "/roles/%s/%s/%s" % (i, j, k), "r") as f:
                     result["roles"][i][j][k] = f.read()
 
     return json.dumps(result)
 
-if __name__ == "__main__":   
+
+if __name__ == "__main__":
     app.run(debug=True)

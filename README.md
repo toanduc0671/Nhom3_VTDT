@@ -194,11 +194,11 @@ Kéo xuống dưới ta sẽ thấy thông tin chi tiết về deploy được c
 
 ![travisci](./image/11.jpg)
 
-- Travis-ci là một dự án mã nguồn mở, được xây dựng đầy đủ các tính năng CI, giúp chúng ta dễ dàng test và deploy các dự án được lưu trữ trên GitHub.
+- Travis-ci là một nền tảng cung cấp dịch vụ continuous integration, được xây dựng đầy đủ các tính năng CI, giúp chúng ta dễ dàng test và deploy các dự án được lưu trữ trên GitHub hoặc bitbucket
 - Mô hình hoạt động của Travis-ci:
   1. Developer sẽ push code lên github.
   2. Thông qua webhooks, Travis-ci sẽ biết được có code mới được commit, nó sẽ pull code đó về.
-  3. Dựa vào file cấu hình .travis.ym travis sẽ tiến hành chạy và thông báo trở ngược lại cho người dùng.
+  3. Dựa vào file cấu hình .travis.yml travis sẽ tiến hành chạy và thông báo trở ngược lại cho người dùng.
 
 ![travisvi_workflow](./image/12.jpg)
 
@@ -244,23 +244,25 @@ Kéo xuống dưới ta sẽ thấy thông tin chi tiết về deploy được c
 
 ```yml
 name: autopep8
-on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
-
-  workflow_dispatch:
-
+on: push
 jobs:
-  build:
+  autopep8:
     runs-on: ubuntu-latest
-
     steps:
+      - uses: actions/checkout@v2
       - name: autopep8
-        uses: peter-evans/autopep8@v1.2.1
+        uses: peter-evans/autopep8@v1
         with:
-          args: --recursive --in-place --aggressive --aggressive
+          args: --recursive --in-place --aggressive --aggressive .
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          commit-message: autopep8 action fixes
+          title: Fixes by autopep8 action
+          body: This is an auto-generated PR with fixes by autopep8.
+          labels: autopep8, automated pr
+          reviewers: peter-evans
+          branch: autopep8-patches
 
 ```
 

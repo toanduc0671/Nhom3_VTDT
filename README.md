@@ -2,7 +2,7 @@
 
 | Travis CI™ | GitHub® Actions | CircleCI® |
 | ----------- | ----------- | ----------- |
-| [![Build Status](https://travis-ci.com/toanduc0671/Nhom3_VTDT.svg)](https://travis-ci.com/toanduc0671/Nhom3_VTDT) | [![PEP8](https://github.com/toanduc0671/Nhom3_VTDT/actions/workflows/Git_CI.yml/badge.svg)](https://github.com/toanduc0671/Nhom3_VTDT/actions/workflows/Git_CI.yml) | [![CircleCI](https://circleci.com/gh/4ward110/Nhom3_VTDT/tree/vu-duc-long.svg?style=svg)](https://circleci.com/gh/4ward110/Nhom3_VTDT/tree/vu-duc-long) |
+| [![Build Status](https://travis-ci.com/toanduc0671/Nhom3_VTDT.svg)](https://travis-ci.com/toanduc0671/Nhom3_VTDT) | [![PEP8](https://github.com/toanduc0671/Nhom3_VTDT/actions/workflows/Git_CI.yml/badge.svg)](https://github.com/toanduc0671/Nhom3_VTDT/actions/workflows/Git_CI.yml) | [![CircleCI](https://circleci.com/gh/toanduc0671/Nhom3_VTDT.svg?style=svg)](https://circleci.com/gh/toanduc0671/Nhom3_VTDT) |
 
 - [Giới thiệu và hướng dẫn sử dụng sản phẩm triển khai tự động hoá Ansible qua giao diện web](#giới-thiệu-và-hướng-dẫn-sử-dụng-sản-phẩm-triển-khai-tự-động-hoá-ansible-qua-giao-diện-web)
   - [I. Khái quát về đề tài](#i-khái-quát-về-đề-tài)
@@ -271,4 +271,3 @@ jobs:
 
 - Python Enhancement Proposal #8 (thường được viết tắt PEP-8), là tập hợp các chỉ dẫn về định dạng code, phong cách lập trình được chia sẻ chung giữa các lập trình viên Python. PEP-8 được đề xuất bởi các chuyên gia trong "hội đồng" sáng lập ngôn ngữ lập trình Python. Việc viết code theo đúng chuẩn chung PEP-8 sẽ giúp cho các lập trình viên dễ dàng hơn khi đọc code của nhau.
 
-abc

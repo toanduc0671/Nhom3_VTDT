@@ -120,9 +120,7 @@ def deploy():
     os.system(
         "export ANSIBLE_CALLBACK_PLUGINS=$(python3 -m ara.setup.callback_plugins)")
     os.system(
-        "ansible-playbook -i " +
-        path_to_savefile +
-        "/" +
+        "ansible-playbook -i " + path_to_savefile + "/" +
         input_inventory +
         " " +
         path_to_savefile +
@@ -251,7 +249,5 @@ def getFilesContent():
                 with open(app.config["UPLOADS"] + "/roles/%s/%s/%s" % (i, j, k), "r") as f:
                     result["roles"][i][j][k] = f.read()
     return json.dumps(result)
-
-
 if __name__ == "__main__":
     app.run(debug=True)
